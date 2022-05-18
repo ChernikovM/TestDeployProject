@@ -1,0 +1,96 @@
+<!--<p>stickers works!</p>-->
+
+<!--<button class="btn btn-success right" (click)="loadLabels()">-->
+<!--  Load labels-->
+<!--</button>-->
+
+<!--<button class="btn btn-success right" (click)="loadStickers()">-->
+<!--  Load stickers-->
+<!--</button>-->
+
+<!--<h1>Labels:</h1>-->
+<!--<div class="col-md-3 col-sm-6" *ngFor="let label of labels$ | async">-->
+<!--  <div class="label">-->
+<!--    <p>{{label.name}}</p>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<h1>Stickers:</h1>-->
+<!--<div class="col-md-3 col-sm-6" *ngFor="let sp of stickerPacks$ | async">-->
+<!--  <div class="stickerPack">-->
+<!--    <p>{{sp.name}} | {{sp.telegramLink}}</p>-->
+<!--  </div>-->
+<!--</div>-->
+
+<h1>Stickers</h1>
+
+<div>Stickers on page: {{(stickerPacks$ | async)?.length}}</div>
+<div>Available pages: {{(pageInfo$ | async)?.totalPages}}</div>
+
+<form>
+<!--  <div class="form-group form-inline">-->
+<!--    Full text search: <input class="form-control ml-2" type="text" name="filterString" [(ngModel)]="filterString"/>-->
+<!--  </div>-->
+
+  <app-pagination (pageChanged)="updateView()"></app-pagination>
+
+<!--  <app-pagesize-dropdown (pageSizeChanged)="updateView()"></app-pagesize-dropdown>-->
+
+<!--  <table class="table table-striped">-->
+<!--    <thead>-->
+<!--    <tr >-->
+<!--      <th scope="col" >-->
+<!--                <span filterable="firstName" [ngbPopover]="popContent" [autoClose]="'outside'" >-->
+<!--                    Firstname-->
+<!--                </span>-->
+<!--        <span sortable="firstName" (sort)="onSort($event)">-->
+<!--                    <i *ngIf='sortField != "firstName" || (sortField === "firstName" && direction === "")' class="fas fa-sort" ></i>-->
+<!--                    <i *ngIf='direction === "asc" && sortField === "firstName"' class="fas fa-sort-up" ></i>-->
+<!--                    <i *ngIf='direction === "desc" && sortField === "firstName"' class="fas fa-sort-down" ></i>-->
+<!--                </span>-->
+<!--      </th>-->
+<!--      <th scope="col">-->
+<!--                <span filterable="lastName" [ngbPopover]="popContent" [autoClose]="'outside'" >-->
+<!--                    Lastname-->
+<!--                </span>-->
+<!--        <span sortable="lastName" (sort)="onSort($event)">-->
+<!--                    <i *ngIf='sortField != "lastName" || (sortField === "lastName" && direction === "")' class="fas fa-sort" ></i>-->
+<!--                    <i *ngIf='direction === "asc" && sortField === "lastName"' class="fas fa-sort-up" ></i>-->
+<!--                    <i *ngIf='direction === "desc" && sortField === "lastName"' class="fas fa-sort-down" ></i>-->
+<!--                </span>-->
+<!--      </th>-->
+<!--      <th scope="col" >-->
+<!--                <span filterable="email" [ngbPopover]="popContent" [autoClose]="'outside'" >-->
+<!--                    Email address-->
+<!--                </span>-->
+<!--        <span sortable="email" (sort)="onSort($event)">-->
+<!--                    <i *ngIf='sortField != "email" || (sortField === "email" && direction === "")' class="fas fa-sort" ></i>-->
+<!--                    <i *ngIf='direction === "asc" && sortField === "email"' class="fas fa-sort-up" ></i>-->
+<!--                    <i *ngIf='direction === "desc" && sortField === "email"' class="fas fa-sort-down" ></i>-->
+<!--                </span>-->
+<!--      </th>-->
+<!--      <th scope="col" >Details </th>-->
+<!--      <th scope="col" >Status </th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr *ngFor="let user of data$ | async">-->
+<!--      <td><ngb-highlight [result]="user.firstName" [term]="filterString"></ngb-highlight></td>-->
+<!--      <td><ngb-highlight [result]="user.lastName" [term]="filterString"></ngb-highlight></td>-->
+<!--      <td><ngb-highlight [result]="user.email" [term]="filterString"></ngb-highlight></td>-->
+<!--      <td><i (click)="getUserDetails(user)" class = "fas fa-edit fa-lg active"></i></td>-->
+<!--      <td>-->
+<!--                <span (click)="changeUserStatus(user)">-->
+<!--                    <i *ngIf="user.lockoutEnabled === true && (user.lockoutEnd === null)" class="fas fa-toggle-on fa-2x active" ></i>-->
+<!--                    <i *ngIf="user.lockoutEnabled === true && user.lockoutEnd != null" class="fas fa-toggle-off fa-2x active" ngbTooltip="Unblock date: {{user.lockoutEnd | date}}" placement="left"></i>-->
+<!--                </span>-->
+<!--        <span>-->
+<!--                    <i *ngIf="user.lockoutEnabled === false" class="fas fa-audio-description fa-2x"></i>-->
+<!--                </span>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+
+<!--  </table>-->
+
+</form>

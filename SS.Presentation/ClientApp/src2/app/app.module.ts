@@ -9,8 +9,6 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { StickersComponent } from './stickers/stickers.component';
-import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -18,19 +16,16 @@ import {SharedModule} from "./shared/shared.module";
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent,
-    StickersComponent
+    FetchDataComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    SharedModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'stickers', component: StickersComponent },
     ])
   ],
   providers: [],
