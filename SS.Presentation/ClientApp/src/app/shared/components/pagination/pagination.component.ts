@@ -15,8 +15,9 @@ export class PaginationComponent implements OnInit {
   @Select(StickersState.getPageInfo) pageInfo$!: Observable<IPageInfoResponse>;
   @Output() pageChanged = new EventEmitter();
 
-  page?: number;
-  totalPages?: number;
+  page?: number | undefined;
+  collectionSize?: number | undefined;
+  pageSize?: number | undefined;
 
   constructor(
     private _store: Store
@@ -24,14 +25,15 @@ export class PaginationComponent implements OnInit {
 
   ngOnInit(): void {
     this.pageInfo$.subscribe(data => {
-      this.page = data.currentPageNumber;
-      this.totalPages = data.totalPages;
+      this.page = data.currentPage;
+      this.collectionSize = data.fullCollectionSize;
+      this.pageSize = data.pageSize;
     });
   }
 
   onPageChanged(){
-    if(this.page !== undefined && this.totalPages !== undefined){
-      if(this.page > 0 && this.page <= this.totalPages){
+    if(this.page !== undefined && this.collectionSize !== undefined){
+      if(this.page > 0 && this.page <= this.collectionSize){
         this.updatePage();
       }
     }

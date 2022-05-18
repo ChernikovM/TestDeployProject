@@ -3,6 +3,7 @@ export enum EStickersActions{
   GetLabelsCollection = '[Stickers] Get Labels Collection',
 
   SetCurrentPage = '[Stickers] Set Current Page',
+  SetPageSize = '[Stickers] Set Page Size',
 }
 
 export namespace StickersActions{
@@ -20,5 +21,10 @@ export namespace StickersActions{
   export class SetCurrentPage {
     static readonly type = EStickersActions.SetCurrentPage;
     constructor(public newPage: number) { }
+  }
+
+  export class SetPageSize {
+    static readonly type = EStickersActions.SetPageSize;
+    constructor(public newSize: number) { }
   }
 }

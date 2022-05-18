@@ -6,9 +6,5 @@ public class PageInfoResponse
 
     public uint? PageSize { get; set; }
 
-    public uint? TotalPages { get; set; }
-
-    public bool? HasNextPage => this.CurrentPage < this.TotalPages;
-
-    public bool? HasPreviousPage => this.CurrentPage > 1;
+    public int? FullCollectionSize { get; set; }
 }

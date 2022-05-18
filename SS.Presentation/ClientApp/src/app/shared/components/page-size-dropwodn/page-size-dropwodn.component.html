@@ -1,0 +1,9 @@
+<div class="btn-group mr-3">
+  <button type="button" class="btn btn-primary">Page size:</button>
+  <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+    <button class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle>{{pageSize$ | async}} </button>
+    <div class="dropdown-menu" ngbDropdownMenu>
+      <button ngbDropdownItem (click)="onPageSizeChange(size)" *ngFor="let size of availablePageSizes">{{size}}</button>
+    </div>
+  </div>
+</div>

@@ -25,7 +25,7 @@
 <h1>Stickers</h1>
 
 <div>Stickers on page: {{(stickerPacks$ | async)?.length}}</div>
-<div>Available pages: {{(pageInfo$ | async)?.totalPages}}</div>
+<div>Entites found: {{(pageInfo$ | async)?.fullCollectionSize}}</div>
 
 <form>
 <!--  <div class="form-group form-inline">-->
@@ -33,64 +33,36 @@
 <!--  </div>-->
 
   <app-pagination (pageChanged)="updateView()"></app-pagination>
+  <app-page-size-dropwodn (pageSizeChanged)="updateView()"></app-page-size-dropwodn>
 
 <!--  <app-pagesize-dropdown (pageSizeChanged)="updateView()"></app-pagesize-dropdown>-->
 
-<!--  <table class="table table-striped">-->
-<!--    <thead>-->
-<!--    <tr >-->
-<!--      <th scope="col" >-->
-<!--                <span filterable="firstName" [ngbPopover]="popContent" [autoClose]="'outside'" >-->
-<!--                    Firstname-->
-<!--                </span>-->
-<!--        <span sortable="firstName" (sort)="onSort($event)">-->
-<!--                    <i *ngIf='sortField != "firstName" || (sortField === "firstName" && direction === "")' class="fas fa-sort" ></i>-->
-<!--                    <i *ngIf='direction === "asc" && sortField === "firstName"' class="fas fa-sort-up" ></i>-->
-<!--                    <i *ngIf='direction === "desc" && sortField === "firstName"' class="fas fa-sort-down" ></i>-->
-<!--                </span>-->
-<!--      </th>-->
-<!--      <th scope="col">-->
-<!--                <span filterable="lastName" [ngbPopover]="popContent" [autoClose]="'outside'" >-->
-<!--                    Lastname-->
-<!--                </span>-->
-<!--        <span sortable="lastName" (sort)="onSort($event)">-->
-<!--                    <i *ngIf='sortField != "lastName" || (sortField === "lastName" && direction === "")' class="fas fa-sort" ></i>-->
-<!--                    <i *ngIf='direction === "asc" && sortField === "lastName"' class="fas fa-sort-up" ></i>-->
-<!--                    <i *ngIf='direction === "desc" && sortField === "lastName"' class="fas fa-sort-down" ></i>-->
-<!--                </span>-->
-<!--      </th>-->
-<!--      <th scope="col" >-->
-<!--                <span filterable="email" [ngbPopover]="popContent" [autoClose]="'outside'" >-->
-<!--                    Email address-->
-<!--                </span>-->
-<!--        <span sortable="email" (sort)="onSort($event)">-->
-<!--                    <i *ngIf='sortField != "email" || (sortField === "email" && direction === "")' class="fas fa-sort" ></i>-->
-<!--                    <i *ngIf='direction === "asc" && sortField === "email"' class="fas fa-sort-up" ></i>-->
-<!--                    <i *ngIf='direction === "desc" && sortField === "email"' class="fas fa-sort-down" ></i>-->
-<!--                </span>-->
-<!--      </th>-->
-<!--      <th scope="col" >Details </th>-->
-<!--      <th scope="col" >Status </th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr *ngFor="let user of data$ | async">-->
-<!--      <td><ngb-highlight [result]="user.firstName" [term]="filterString"></ngb-highlight></td>-->
-<!--      <td><ngb-highlight [result]="user.lastName" [term]="filterString"></ngb-highlight></td>-->
-<!--      <td><ngb-highlight [result]="user.email" [term]="filterString"></ngb-highlight></td>-->
-<!--      <td><i (click)="getUserDetails(user)" class = "fas fa-edit fa-lg active"></i></td>-->
-<!--      <td>-->
-<!--                <span (click)="changeUserStatus(user)">-->
-<!--                    <i *ngIf="user.lockoutEnabled === true && (user.lockoutEnd === null)" class="fas fa-toggle-on fa-2x active" ></i>-->
-<!--                    <i *ngIf="user.lockoutEnabled === true && user.lockoutEnd != null" class="fas fa-toggle-off fa-2x active" ngbTooltip="Unblock date: {{user.lockoutEnd | date}}" placement="left"></i>-->
-<!--                </span>-->
-<!--        <span>-->
-<!--                    <i *ngIf="user.lockoutEnabled === false" class="fas fa-audio-description fa-2x"></i>-->
-<!--                </span>-->
-<!--      </td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
+  <table class="table table-striped">
+    <thead>
+    <tr >
+      <th scope="col" >Name</th>
+      <th scope="col">Count</th>
+      <th scope="col" >Telegram link</th>
+      <th scope="col" >Labels</th>
+      <th scope="col" >IsRemoved</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let stickerPack of stickerPacks$ | async">
+      <td>{{stickerPack.name}}</td>
+      <td>{{stickerPack.count}}</td>
+      <td><a href="{{stickerPack.telegramLink}}" target="_blank">install</a></td>
+      <td>
+        <div *ngIf="stickerPack.labels !== undefined && stickerPack.labels.length > 0">
+          <p *ngFor="let label of stickerPack.labels">
+            {{label.name}}
+          </p>
+        </div>
+      </td>
+      <td>{{stickerPack.isRemoved}}</td>
+    </tr>
+    </tbody>
 
-<!--  </table>-->
+  </table>
 
 </form>

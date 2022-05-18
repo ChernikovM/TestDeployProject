@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: " https://localhost:44446",
-  defaultPageSize: 20
+  defaultPageSize: 20,
+  availablePageSizes: [ 20, 50, 100 ]
 };
 
 /*

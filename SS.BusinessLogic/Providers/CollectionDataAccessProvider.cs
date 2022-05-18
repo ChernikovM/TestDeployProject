@@ -45,8 +45,7 @@ public static class CollectionDataAccessProvider
                 .ToList();
 
             pageInfo.CurrentPage = request.Page;
-            // ReSharper disable once PossibleLossOfFraction
-            pageInfo.TotalPages = (uint) Math.Ceiling(entities.Count / (decimal) request.PageSize.Value);
+            pageInfo.FullCollectionSize = entities.Count;
             pageInfo.PageSize = request.PageSize;
         }
         else
@@ -56,8 +55,8 @@ public static class CollectionDataAccessProvider
                 .ToList();
 
             pageInfo.CurrentPage = 1;
+            pageInfo.FullCollectionSize = entities.Count;
             pageInfo.PageSize = 20;
-            pageInfo.TotalPages = (uint) Math.Ceiling(entities.Count / 20.0m); // TODO: settings required
         }
 
         return result;

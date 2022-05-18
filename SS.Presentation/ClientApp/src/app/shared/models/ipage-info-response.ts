@@ -1,7 +1,5 @@
 export interface IPageInfoResponse {
-  currentPageNumber: number,
-  totalPages: number,
-  pageSize: number,
-  hasPreviousPage: boolean,
-  hasNextPage: boolean
+  currentPage?: number,
+  pageSize?: number,
+  fullCollectionSize?: number
 }

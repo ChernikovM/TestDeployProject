@@ -29,10 +29,14 @@ const defaults = {
   labels: [],
   stickerPacks: [],
   page: 1,
-  pageSize: environment.defaultPageSize + 10,
+  pageSize: environment.defaultPageSize,
   filters: [],
   labelIds: [],
-  pageInfoResponse: undefined
+  pageInfoResponse: {
+    pageSize: undefined,
+    currentPage: undefined,
+    fullCollectionSize: undefined
+  }
 };
 
 @State<StickersStateModel>({
@@ -66,6 +70,12 @@ export class StickersState {
   static getFilters(state: StickersStateModel){
     return state.filters;
   }
+
+  @Selector()
+  static getPageSize(state: StickersStateModel){
+    return state.pageSize;
+  }
+
 
   @Action(StickersActions.GetLabelsCollection)
   getLabels(context: StateContext<StickersStateModel>){
@@ -115,7 +125,8 @@ export class StickersState {
             // responseModel: result,
             stickerPacks: result.data,
             filters: result.filters,
-            pageInfoResponse: result.pageInfo
+            pageInfoResponse: result.pageInfo,
+            pageSize: result.pageInfo.pageSize
           });
         }),
         catchError(async (result: IResponseBase) => {
@@ -134,6 +145,15 @@ export class StickersState {
     context.setState({
       ...state,
       page: newPage
+    });
+  }
+
+  @Action(StickersActions.SetPageSize)
+  setPageSize(context: StateContext<StickersStateModel>, { newSize }: StickersActions.SetPageSize){
+    const state = context.getState();
+    context.setState({
+      ...state,
+      pageSize: newSize
     });
   }
 }
