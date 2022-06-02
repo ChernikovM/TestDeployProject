@@ -31,14 +31,12 @@ public class ChpicParser : IParserBase
 
             try
             {
-                pageResult = await this.ParsePageAsync(page);
+                pageResult = await this.ParsePageAsync(page++);
 
                 if (pageResult?.Any() is true)
                 {
                     parseResult.AddRange(pageResult);
                 }
-
-                page++;
             }
             catch (Exception)
             {
@@ -63,7 +61,7 @@ public class ChpicParser : IParserBase
 
     public async Task<List<StickerPack>> ParsePageAsync(int page)
     {
-        Console.WriteLine($"Parsing {page} page.");
+        Console.Write($"[CHPIC] Parsing {page} page...");
 
         List<StickerPack> result = null;
         List<HtmlNode> stickerNodes = null;
@@ -82,9 +80,10 @@ public class ChpicParser : IParserBase
                 ?.Where(x => x.Name == "div" && !x.OuterHtml.Contains(AdblockDivContent))
                 .ToList();
         }
-        catch (Exception)
+        catch (Exception exception)
         {
             // TODO: add logger
+            Console.WriteLine($" Exception occured: '{exception.Message}' [{exception.StackTrace}].");
         }
 
         if (stickerNodes?.Any() is true)
@@ -93,6 +92,8 @@ public class ChpicParser : IParserBase
                 .Select(this.CreateStickerPack)
                 .ToList();
         }
+
+        Console.WriteLine($" {result?.Count ?? 0} stickerPacks parsed.");
 
         return result;
     }

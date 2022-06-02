@@ -1,6 +1,7 @@
 using SS.BusinessLogic;
 using SS.DataAccess;
 using SS.Parser;
+using SS.Parser.Base;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,21 @@ builder.Services
     .RegisterBusinessServices();
 
 var app = builder.Build();
+
+#region UPDATE DB
+
+// var dbUpdater = builder.Services.BuildServiceProvider().GetService<IDbUpdater>();
+//
+// if (dbUpdater is not null)
+// {
+//     await dbUpdater.UpdateAsync();
+// }
+// else
+// {
+//     throw new Exception("Builder not registered.");
+// }
+
+#endregion UPDATE DB
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

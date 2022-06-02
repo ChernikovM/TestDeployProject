@@ -59,7 +59,9 @@ public class DbUpdater : IDbUpdater
                                 await this._stickerPackRepository
                                     .AddRangeAsync(chunk);
 
-                                await this._stickerPackRepository.SaveChanges();
+                                int savedCount = await this._stickerPackRepository.SaveChanges();
+
+                                Console.WriteLine($"Entities saved: {savedCount}.");
 
                                 chunk.RemoveAll(_ => true);
                             }

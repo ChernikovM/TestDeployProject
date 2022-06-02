@@ -11,7 +11,7 @@ public sealed class AppContext : DbContext
 
     public AppContext(DbContextOptions<AppContext> options) : base(options)
     {
-        // this.Database.EnsureCreated();
+        this.Database.Migrate();
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -32,11 +32,4 @@ public sealed class AppContext : DbContext
                     .IsUnique();
             });
     }
-
-    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    // {
-    //     // TODO: move to config file
-    //     optionsBuilder
-    //         .UseNpgsql("Host=localhost;Port=5432;Database=sticker_searcher_db;Username=postgres;Password=postgres");
-    // }
 }
