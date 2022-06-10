@@ -5,7 +5,7 @@ using SS.BusinessLogic.Services.Interfaces;
 namespace SS.Presentation.Controllers;
 
 [ApiController]
-[Route("[controller]/[action]")]
+[Route("api/labels")]
 public class LabelsController : Base.ControllerBase<LabelsController>
 {
     private readonly ILabelsService _labelsService;
@@ -17,7 +17,7 @@ public class LabelsController : Base.ControllerBase<LabelsController>
         this._labelsService = labelsService;
     }
 
-    [HttpPost]
+    [HttpPost("get")]
     public async Task<IActionResult> Get([FromBody] CollectionRequestBase request)
     {
         return new OkObjectResult(await this._labelsService.GetLabels(request));

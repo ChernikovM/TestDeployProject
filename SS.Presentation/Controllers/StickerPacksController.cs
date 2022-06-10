@@ -5,7 +5,7 @@ using SS.BusinessLogic.Services.Interfaces;
 namespace SS.Presentation.Controllers;
 
 [ApiController]
-[Route("[controller]/[action]")]
+[Route("api/[controller]/[action]")]
 public class StickerPacksController : Base.ControllerBase<StickerPacksController>
 {
     private readonly IStickersService _stickersService;

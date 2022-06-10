@@ -1,7 +1,7 @@
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using SS.BusinessLogic;
 using SS.DataAccess;
 using SS.Parser;
-using SS.Parser.Base;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,12 +42,26 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+app.UseEndpoints(
+    endpoints =>
+    {
+        endpoints.MapControllerRoute(
+            name: "api",
+            pattern: "{controller}/{action=Index}");
+    });
 
-app.MapFallbackToFile("index.html");
+app.UseSpa(
+    spa =>
+    {
+        spa.Options.SourcePath = "ClientApp";
+
+        if (app.Environment.IsDevelopment())
+        {
+            spa.UseAngularCliServer(npmScript: "start");
+        }
+    });
 
 app.Run();
